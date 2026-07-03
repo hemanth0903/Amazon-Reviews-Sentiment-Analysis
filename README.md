@@ -43,22 +43,28 @@ Generate business recommendations based on analytical findings.
 The analysis was designed to answer the following questions:
 
 1. Customer Trust
+   
 Do verified purchase reviews receive more helpful votes than non-verified reviews?
 
 2. Customer Satisfaction
+   
 How are customer ratings distributed?
 Are customers generally satisfied with the products?
 
 3. Product Performance
+
 Which products generate the highest customer engagement?
 
 4. Customer Behavior
+   
 How do product ratings change over time?
 
 5. Customer Voice
+   
 Does textual sentiment align with numerical ratings?
 
 6. Review Quality
+   
 What characteristics distinguish highly helpful reviews from less helpful ones?
 
 
