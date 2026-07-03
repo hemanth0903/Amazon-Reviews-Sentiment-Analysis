@@ -1,0 +1,786 @@
+{
+  "datasets": [
+    {
+      "name": "f546b138",
+      "displayName": "Home & Kitchen - KPI Summary dataset",
+      "config": {
+        "version": "1.1",
+        "source": "SELECT\r\n  COUNT(*) AS total_reviews,\r\n  ROUND(AVG(rating), 2) AS avg_rating,\r\n  ROUND(AVG(helpful_vote), 2) AS avg_helpful_votes\r\nFROM workspace.default.home_kitchen_reviews_clean_sample",
+        "dimensions": [
+          {
+            "name": "total_reviews",
+            "expr": "source.total_reviews",
+            "displayName": "Total Reviews"
+          },
+          {
+            "name": "avg_rating",
+            "expr": "source.avg_rating",
+            "displayName": "Avg Rating"
+          },
+          {
+            "name": "avg_helpful_votes",
+            "expr": "source.avg_helpful_votes",
+            "displayName": "Avg Helpful Votes"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "a35e4b5a",
+      "displayName": "Home & Kitchen - Verified Purchase dataset",
+      "config": {
+        "version": "1.1",
+        "source": "SELECT\r\n  verified_purchase,\r\n  COUNT(*) AS review_count,\r\n  ROUND(AVG(helpful_vote), 2) AS avg_helpful_votes\r\nFROM workspace.default.home_kitchen_reviews_clean_sample\r\nGROUP BY verified_purchase",
+        "dimensions": [
+          {
+            "name": "verified_purchase",
+            "expr": "source.verified_purchase",
+            "displayName": "Verified Purchase"
+          },
+          {
+            "name": "review_count",
+            "expr": "source.review_count",
+            "displayName": "Review Count"
+          },
+          {
+            "name": "avg_helpful_votes",
+            "expr": "source.avg_helpful_votes",
+            "displayName": "Avg Helpful Votes"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "6ef76bca",
+      "displayName": "Home & Kitchen -  Review Length Insight",
+      "config": {
+        "version": "1.1",
+        "source": "SELECT\r\n  CASE\r\n    WHEN helpful_vote >= 5 THEN 'Helpful'\r\n    ELSE 'Not Helpful'\r\n  END AS helpful_group,\r\n  COUNT(*) AS review_count,\r\n  ROUND(AVG(review_length), 2) AS avg_review_length,\r\n  ROUND(AVG(rating), 2) AS avg_rating\r\nFROM workspace.default.home_kitchen_reviews_clean_sample\r\nGROUP BY\r\n  CASE\r\n    WHEN helpful_vote >= 5 THEN 'Helpful'\r\n    ELSE 'Not Helpful'\r\n  END",
+        "dimensions": [
+          {
+            "name": "helpful_group",
+            "expr": "source.helpful_group",
+            "displayName": "Helpful Group"
+          },
+          {
+            "name": "review_count",
+            "expr": "source.review_count",
+            "displayName": "Review Count"
+          },
+          {
+            "name": "avg_review_length",
+            "expr": "source.avg_review_length",
+            "displayName": "Avg Review Length"
+          },
+          {
+            "name": "avg_rating",
+            "expr": "source.avg_rating",
+            "displayName": "Avg Rating"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bd2adfa0",
+      "displayName": "Home & Kitchen -  Rating Distribution",
+      "queryLines": [
+        "SELECT\r\n",
+        "  CAST(rating AS STRING) AS rating_label,\r\n",
+        "  COUNT(*) AS review_count\r\n",
+        "FROM workspace.default.home_kitchen_reviews_clean_sample\r\n",
+        "GROUP BY CAST(rating AS STRING)\r\n",
+        "ORDER BY rating_label"
+      ]
+    },
+    {
+      "name": "2ea3203e",
+      "displayName": "Home Kitchen Monthly Trend",
+      "queryLines": [
+        "SELECT\r\n",
+        "  date_trunc('month', review_time) AS review_month,\r\n",
+        "  COUNT(*) AS review_count,\r\n",
+        "  ROUND(AVG(rating), 2) AS avg_rating\r\n",
+        "FROM workspace.default.home_kitchen_reviews_clean_sample\r\n",
+        "GROUP BY date_trunc('month', review_time)\r\n",
+        "ORDER BY review_month"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "43d5204b",
+      "displayName": "Home & Kitchen - KPI Summary",
+      "layout": [
+        {
+          "widget": {
+            "name": "ad5f365b",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f546b138",
+                  "fields": [
+                    {
+                      "name": "sum(total_reviews)",
+                      "expression": "SUM(`total_reviews`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen Total Reviews"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_reviews)"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "aeb6c994",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f546b138",
+                  "fields": [
+                    {
+                      "name": "avg_rating",
+                      "expression": "`avg_rating`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen Average Rating"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg_rating"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "796f93f6",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f546b138",
+                  "fields": [
+                    {
+                      "name": "avg_helpful_votes",
+                      "expression": "`avg_helpful_votes`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen Average Helpful Votes"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg_helpful_votes"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 0,
+            "width": 4,
+            "height": 3
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "b1754d7d",
+      "displayName": "Home & Kitchen - Verified Purchase Impact",
+      "layout": [
+        {
+          "widget": {
+            "name": "b10b51b8",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a35e4b5a",
+                  "fields": [
+                    {
+                      "name": "verified_purchase",
+                      "expression": "`verified_purchase`"
+                    },
+                    {
+                      "name": "avg_helpful_votes",
+                      "expression": "`avg_helpful_votes`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen - Verified Purchase vs Average Helpful Votes"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "verified_purchase",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg_helpful_votes",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "12cee107",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a35e4b5a",
+                  "fields": [
+                    {
+                      "name": "verified_purchase",
+                      "expression": "`verified_purchase`"
+                    },
+                    {
+                      "name": "review_count",
+                      "expression": "`review_count`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen - Review Count by Verification Status"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "verified_purchase",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "review_count",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "04e3469a",
+      "displayName": "Home & Kitchen - Review Length",
+      "layout": [
+        {
+          "widget": {
+            "name": "c5596cbd",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6ef76bca",
+                  "fields": [
+                    {
+                      "name": "helpful_group",
+                      "expression": "`helpful_group`"
+                    },
+                    {
+                      "name": "avg_review_length",
+                      "expression": "`avg_review_length`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen - Helpful vs Not Helpful Review Length"
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "helpful_group",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg_review_length",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "home-kitchen-average-rating-helpful-group",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6ef76bca",
+                  "fields": [
+                    {
+                      "name": "helpful_group",
+                      "expression": "`helpful_group`"
+                    },
+                    {
+                      "name": "avg_rating",
+                      "expression": "`avg_rating`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Home & Kitchen - Average Rating by Helpful Group"
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "helpful_group",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg_rating",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "64668bb9",
+      "displayName": "Home & Kitchen - Review Count by Rating",
+      "layout": [
+        {
+          "widget": {
+            "name": "home-kitchen-review-count-by-rating",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bd2adfa0",
+                  "fields": [
+                    {
+                      "name": "rating_label",
+                      "expression": "`rating_label`"
+                    },
+                    {
+                      "name": "review_count",
+                      "expression": "`review_count`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Review Count by Rating"
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "rating_label",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "review_count",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 7
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "eb52b780",
+      "displayName": "Home Kitchen Monthly Trend",
+      "layout": [
+        {
+          "widget": {
+            "name": "average-rating-trend-over-time",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "2ea3203e",
+                  "fields": [
+                    {
+                      "name": "monthly(review_month)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `review_month`)"
+                    },
+                    {
+                      "name": "avg_rating",
+                      "expression": "`avg_rating`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Average Rating Trend Over Time"
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(review_month)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg_rating",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 7
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
