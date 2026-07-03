@@ -43,8 +43,8 @@ Generate business recommendations based on analytical findings.
 The analysis was designed to answer the following questions:
 
 1. Customer Trust
-   
-Do verified purchase reviews receive more helpful votes than non-verified reviews?
+
+   Do verified purchase reviews receive more helpful votes than non-verified reviews?
 
 2. Customer Satisfaction
    
