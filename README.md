@@ -1,5 +1,6 @@
-Amazon Customer Reviews Analytics & Sentiment Analysis
-Executive Summary
+### Amazon Customer Reviews Analytics & Sentiment Analysis
+
+## Executive Summary
 
 Every day, millions of customers leave product reviews on Amazon. These reviews influence purchasing decisions, product rankings, and customer trust. While star ratings provide a quick measure of customer satisfaction, they often fail to explain the reasons behind customer opinions.
 
