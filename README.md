@@ -76,3 +76,6 @@ The analysis shows that verified purchase status has a substantial positive infl
 ### ⏱️ Temporal Trends in Product Ratings and Review Volume
 
 For high-volume categories, product ratings exhibit a gentle but consistent downward trend over time. In the categories analyzed, the appliances category showed an average rating decrease per year between 2003 and 2007, likely driven by post-launch enthusiasm, seasonal buying patterns, and event-driven drops (such as product issues or new competing releases). Understanding these trends helps businesses interpret rating changes in context rather than treating them as isolated signals.
+
+<img width="593" height="327" alt="image" src="https://github.com/user-attachments/assets/470e6cfb-5e21-43c6-b76a-35ae12520220" />
+
