@@ -24,21 +24,6 @@ This project focuses on answering several key business questions:
 Without these insights, organizations risk making product decisions based solely on numerical ratings rather than understanding the true voice of the customer.
 
 
-## 🎯 Business Objectives
-
-The primary objective was to design and implement an end-to-end data analytics pipeline capable of transforming large-scale customer review data into meaningful business insights.
-
-Specifically, I aimed to:
-
-- Analyze customer rating behavior across products.
-- Compare verified and non-verified purchases.
-- Evaluate review helpfulness.
-- Identify temporal trends in product ratings.
-- Perform sentiment analysis on customer review text.
-- Generate business recommendations based on analytical findings.
-
----
-
 ## ❓ Business Questions
 
 The analysis was designed to answer the following questions:
@@ -62,7 +47,6 @@ The analysis was designed to answer the following questions:
 6. **Review Quality**
    - What characteristics distinguish highly helpful reviews from less helpful ones?
 
----
 
 ## 📈 Analysis and Findings
 
@@ -73,9 +57,26 @@ The analysis shows that verified purchase status has a substantial positive infl
 <img width="665" height="335" alt="image" src="https://github.com/user-attachments/assets/8c42a288-17b2-4c24-ad08-070199a5b335" />
 
 
+
+
 ### ⏱️ Temporal Trends in Product Ratings and Review Volume
 
 For high-volume categories, product ratings exhibit a gentle but consistent downward trend over time. In the categories analyzed, the appliances category showed an average rating decrease per year between 2003 and 2007, likely driven by post-launch enthusiasm, seasonal buying patterns, and event-driven drops (such as product issues or new competing releases). Understanding these trends helps businesses interpret rating changes in context rather than treating them as isolated signals.
 
 <img width="593" height="327" alt="image" src="https://github.com/user-attachments/assets/470e6cfb-5e21-43c6-b76a-35ae12520220" />
+
+
+
+## Sentiment vs Rating:
+
+The screenshots below indicates how the ratings level are directly proportional to the customer sentiments.
+
+<img width="853" height="415" alt="image" src="https://github.com/user-attachments/assets/6ad3ec9f-29d1-4666-bdf8-9042ee471a92" />
+
+<img width="874" height="431" alt="image" src="https://github.com/user-attachments/assets/3c9633bf-1f4c-4df4-9ece-64046b7bad69" />
+
+
+---
+
+
 
