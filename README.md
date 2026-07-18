@@ -1,18 +1,12 @@
 # 📊 Amazon Customer Reviews Analytics & Sentiment Analysis
 
-## 🧾 Executive Summary
+## 💼 Business Problem
 
 Every day, millions of customers leave product reviews on Amazon, influencing purchasing decisions, product rankings, and customer trust. While star ratings provide a quick measure of satisfaction, they rarely explain the reasons behind customer opinions.
 
 In this project, I built an end-to-end analytics pipeline using Databricks, Apache Spark, and Natural Language Processing (NLP) to analyze customer reviews at scale. By combining structured review data with sentiment analysis, I generated insights into customer satisfaction, review quality, verified purchase behavior, and product performance.
 
 The objective was not only to visualize data but also to produce actionable business recommendations that improve customer trust and support better decision-making.
-
----
-
-## 💼 Business Problem
-
-Amazon receives millions of customer reviews every year. Numerical ratings provide an overall indication of customer satisfaction but do not fully capture the complete customer experience.
 
 Business teams need deeper insights into customer feedback to:
 - Improve products and services
@@ -29,7 +23,6 @@ This project focuses on answering several key business questions:
 
 Without these insights, organizations risk making product decisions based solely on numerical ratings rather than understanding the true voice of the customer.
 
----
 
 ## 🎯 Business Objectives
 
@@ -76,6 +69,9 @@ The analysis was designed to answer the following questions:
 ### ✅ Influence of Verified Purchase Status on Review Helpfulness
 
 The analysis shows that verified purchase status has a substantial positive influence on review helpfulness. For the product categories examined, products with a higher share of verified reviews consistently received more helpful votes than non-verified reviews across ratings from 1 to 5. This suggests that increasing the share of verified reviews can strengthen user trust and improve the quality of purchase decisions.
+
+<img width="665" height="335" alt="image" src="https://github.com/user-attachments/assets/8c42a288-17b2-4c24-ad08-070199a5b335" />
+
 
 ### ⏱️ Temporal Trends in Product Ratings and Review Volume
 
