@@ -69,9 +69,11 @@ For high-volume categories, product ratings exhibit a gentle but consistent down
 
 ## Sentiment vs Rating:
 
-The screenshots below indicates how the ratings level are directly proportional to the customer sentiments.
+The first screenshot indicates that the customers prefer products which are highly rated having maximum number of customers and decreases as we go down the rating. 
 
 <img width="853" height="415" alt="image" src="https://github.com/user-attachments/assets/6ad3ec9f-29d1-4666-bdf8-9042ee471a92" />
+
+The average product rating starts at approximately 3.0 in the year 2000 and initially exhibited considerable fluctuations. Between 2000 and 2008, the average rating oscillated between 4.0 and 5.0, indicating varying levels of customer satisfaction during the early years. After 2008, the trend became relatively more stable, with the average rating generally remaining below 4.25 and showing fewer sharp fluctuations. A noticeable decline was observed around 2023, where the average rating dropped below its typical range. This could be due to the product did not get that much acceptance during it's launch. The more stable ratings after 2008 could be due to the products have reached their mature stage in the lifecycle. The decline over the years after that could be due to launch of new products in the market, changing customer expectations.
 
 <img width="874" height="431" alt="image" src="https://github.com/user-attachments/assets/3c9633bf-1f4c-4df4-9ece-64046b7bad69" />
 
